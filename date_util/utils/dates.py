@@ -5,10 +5,11 @@ def get_datetime(timestamp, fmt=None):
 
     datetime_requested = {
         'datetime': date_obj,
-        'unix': timestamp
+        'unix': timestamp,
+        'iso': date_obj.isoformat()
     }
 
     if fmt:
-        datetime_requested['formatted'] = date_obj.strftime(fmt)
+        datetime_requested['formatted'] = date_obj.strftime(fmt).replace("'", '')
     
     return datetime_requested, 200
