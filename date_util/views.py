@@ -1,13 +1,19 @@
-from flask import redirect
+from datetime import datetime
+
+from flask import request
+
+import date_util.utils.dates as d_utils
 from date_util import app
 
-# api routes
+
+# API ROUTES
+
+# base / current date / current time
 @app.route('/api/')
 def base_route():
-    return {
-        'message': 'Hello, world!'
-    }, 200
+    date_obj = datetime.now()
 
-@app.route('/api/now')
-def base_redirect():
-    return redirect('/api/')
+    # query strings?
+    fmt = request.args.get('fmt')
+    
+    return d_utils.get_datetime(date_obj.timestamp(), fmt=fmt)
